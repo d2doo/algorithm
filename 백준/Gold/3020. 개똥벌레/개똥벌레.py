@@ -1,3 +1,17 @@
+# 배열이 정렬되어있으니까 [1, 3, 5]의 높이를 가지고 있는 석순 혹은 종유석이라면
+# 타겟이 부딪히는 지점을 찾고 난 이후에는 찾을 필요가 없음.
+# start가 (종유석/석순) index니까 start리턴
+def binary(array, target, start, end):
+    while start <= end:
+        mid = (start + end) // 2
+
+        if array[mid] < target:
+            start = mid + 1
+        else:
+            end = mid - 1
+
+    return start
+
 N, H = map(int, input().split()) # N: 동굴의 길이, H: 높이. N은 항상 짝수
 
 bottom = [] #석순
@@ -14,21 +28,6 @@ top.sort()
 
 min_c = N #최소 카운트
 cnt = 0 #몇 번?
-
-# 배열이 정렬되어있으니까 [1, 3, 5]의 높이를 가지고 있는 석순 혹은 종유석이라면
-# 타겟이 부딪히는 지점을 찾고 난 이후에는 찾을 필요가 없음.
-# start가 (종유석/석순) index니까 start리턴
-def binary(array, target, start, end):
-    while start <= end:
-        mid = (start + end) // 2
-
-        if array[mid] < target:
-            start = mid + 1
-        else:
-            end = mid - 1
-
-    return start
-
 
 for i in range(1, H + 1):
     # b_cnt = binary(bottom, i - 0.5, 1, N // 2) # start가 인덱스니까
