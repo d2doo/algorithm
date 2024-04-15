@@ -13,11 +13,11 @@ def dijkstra(start):
         if distance[now] < dist:
             continue
 
-        for i in graph[now]:
-            geori = dist + i[1]
-            if geori < distance[i[0]]:
-                distance[i[0]] = geori
-                heapq.heappush(q, (geori, i[0]))
+        for next, next_d in graph[now]:
+            geori = dist + next_d
+            if geori < distance[next]:
+                distance[next] = geori
+                heapq.heappush(q, (geori, next))
 
 # 지름길 개수 N, 가야하는 거리 D
 N, D = map(int, input().split())
