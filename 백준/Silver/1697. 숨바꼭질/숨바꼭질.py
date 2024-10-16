@@ -1,32 +1,23 @@
-#백준 숨바꼭질
-def bfs(N, K):
-    # N에서 K에 도착하는 최단시간 출력...
-    q = []  # 큐 생성
-    q.append(N)  # 시작점 인큐
-    visited = [-1] * 100001  # visited 생성
-    visited[N] = 0 # 시작점 표시
+from collections import deque
 
-    while q: # 큐가 비워질 때 까지...
-        t = q.pop(0) # t <- 디큐
-        if t == K: # t == k 인 경우 종료...
-            return visited[t]
+n, k = map(int, input().split())
+MAX = 100000
+visited = [-1] * (MAX + 1)
+q = deque()
 
-        if t > 0 and visited[t-1] == -1: # t에 인접인... t-1, t+1, t*2 위치가 아직 방문한 적 없으면
-            q.append(t - 1) # 인큐하고 visited 표시
-            visited[t - 1] = visited[t] + 1
+def bfs(n, k):
+    visited[n] = 0
+    q.append(n)
 
-        if t < 100000 and visited[t + 1] == -1:
-            q.append(t + 1)
-            visited[t + 1] = visited[t] + 1
+    while q:
+        temp = q.popleft()
 
-        if t * 2 <= 100000 and visited[t * 2] == -1:
-            q.append(t * 2)
-            visited[t * 2] = visited[t] + 1
+        if temp == k:
+            return visited[temp]
 
+        for i in temp - 1, temp + 1, temp * 2:
+            if 0 <= i <= MAX and visited[i] == -1:
+                visited[i] = visited[temp] + 1
+                q.append(i)
 
-
-
-N, K = map(int, input().split())
-print(bfs(N, K))    # N에서 K에 도착하는 최단시간 출력
-
-
+print(bfs(n, k))
