@@ -1,9 +1,6 @@
 n, k = map(int, input().split()) # m개의 동전 가치, 만들어야 하는 값
-coins = []
+coins = [int(input()) for _ in range(n)]
 ans = 0
-
-for _ in range(n):
-    coins.append(int(input()))
 
 coins.sort(reverse=True)
 
