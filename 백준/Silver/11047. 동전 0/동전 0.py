@@ -1,16 +1,17 @@
-# 동전
-# 그리디
-
-N, K = map(int, input().split())
-
+n, k = map(int, input().split()) # m개의 동전 가치, 만들어야 하는 값
 coins = []
-for _ in range(N):
+ans = 0
+
+for _ in range(n):
     coins.append(int(input()))
-coins.sort(reverse=True) # 나눠서 정수의 몫이 떨어지는 가장 큰 수 부터 나눠야함
 
-min_cnt = 0
+coins.sort(reverse=True)
+
 for coin in coins:
-    min_cnt += K // coin # 첫번째 예시라면 1000 * 4개 + 100 * 2개 
-    K = K % coin
+    if k < coin:
+        continue
+    else:
+        ans += k // coin
+        k %= coin
 
-print(min_cnt)
+print(ans)
